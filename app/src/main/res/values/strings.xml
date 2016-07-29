@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">TianjinFoodGroup</string>
+    <string name="login_seller">卖家登录</string>
+    <string name="user_name">用户名</string>
+    <string name="password">密码</string>
+    <string name="verify_code">验证码</string>
+    <string name="login">登录</string>
+    <string name="forget_password">忘记密码</string>
+    <string name="title_activity_seller_manager">SellerManagerActivity</string>
+    <string name="seller_manager_title">卖家管理中心</string>
+    <string name="my_order">我的订单</string>
+    <string name="see_all_orders">查看全部订单&gt; </string>
+</resources>
