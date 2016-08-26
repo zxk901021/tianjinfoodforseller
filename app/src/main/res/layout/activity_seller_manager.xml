@@ -37,15 +37,26 @@
             <RelativeLayout
                 android:id="@+id/seller_user_img_layout"
                 android:layout_width="match_parent"
-                android:layout_height="100dp"
+                android:layout_height="match_parent"
                 android:layout_below="@+id/seller_manager_separate_line"
-                android:background="@color/white">
+                android:background="@drawable/photo_bg">
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/seller_portrait"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:src="@drawable/user_portrait"/>
+                <TextView
+                    android:id="@+id/user_name_and_integral"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的用户名  积分：9000"
+                    android:textSize="@dimen/text_medium_size"
+                    android:textColor="@color/black"
+                    android:layout_below="@+id/seller_portrait"
+                    android:layout_marginTop="40dp"
+                    android:layout_centerHorizontal="true"/>
 
             </RelativeLayout>
 
