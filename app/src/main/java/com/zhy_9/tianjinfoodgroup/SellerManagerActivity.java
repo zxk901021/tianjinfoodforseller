@@ -28,6 +28,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.activity_seller_manager);
 
         initView();
+        getOrdersCount();
     }
 
     private void initView() {
@@ -60,6 +61,11 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         quitLogin = (Button) findViewById(R.id.quit_login);
         quitLogin.setOnClickListener(this);
     }
+
+    private void getOrdersCount(){
+
+    }
+
 
     @Override
     public void onClick(View v) {
