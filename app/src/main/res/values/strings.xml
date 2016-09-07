@@ -10,4 +10,6 @@
     <string name="seller_manager_title">卖家管理中心</string>
     <string name="my_order">我的订单</string>
     <string name="see_all_orders">查看全部订单&gt; </string>
+    <string name="phone_number">手机号</string>
+    <string name="send_verify_code">发送验证码</string>
 </resources>

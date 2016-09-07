@@ -42,7 +42,8 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:hint="@string/password"
-        android:background="@drawable/corner_edit"/>
+        android:background="@drawable/corner_edit"
+        android:inputType="textPassword"/>
     
     <LinearLayout
         android:id="@+id/login_verify_layout"

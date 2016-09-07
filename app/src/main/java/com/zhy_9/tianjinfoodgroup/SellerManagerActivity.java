@@ -5,10 +5,29 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+
+import com.android.volley.VolleyError;
+import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
+import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
+import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
+import com.zhy_9.tianjinfoodgroup.model.OrderCounts;
+import com.zhy_9.tianjinfoodgroup.model.UserInfo;
+import com.zhy_9.tianjinfoodgroup.util.Constant;
+import com.zhy_9.tianjinfoodgroup.util.RandomString;
+import com.zhy_9.tianjinfoodgroup.util.TextUtil;
+import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
+import com.zhy_9.tianjinfoodgroup.view.BadgeView;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SellerManagerActivity extends Activity implements View.OnClickListener {
 
@@ -20,7 +39,17 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private RelativeLayout managerOrder;
     private RelativeLayout accountSecurity;
     private RelativeLayout mallMessage;
+    private RelativeLayout numberCounts;
     private Button quitLogin;
+    private BadgeView badgeView;
+    private UserInfo info;
+    private TextView userNameAndIntegral;
+    private TextView myOrder;
+    private String userId;
+    private String shopId;
+    private String noncestr, sign, timeStr;
+    private OrderCounts orderCounts;
+    private Map<String, String> params = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,7 +57,11 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         setContentView(R.layout.activity_seller_manager);
 
         initView();
+        initParams();
         getOrdersCount();
+        getMallMessageCount();
+        initWidgetData();
+        addTipCounts();
     }
 
     private void initView() {
@@ -60,9 +93,100 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         mallMessage.setOnClickListener(this);
         quitLogin = (Button) findViewById(R.id.quit_login);
         quitLogin.setOnClickListener(this);
+        numberCounts = (RelativeLayout) findViewById(R.id.number_counts);
+        numberCounts.setOnClickListener(this);
+        userNameAndIntegral = (TextView) findViewById(R.id.user_name_and_integral);
+        myOrder = (TextView) findViewById(R.id.my_order_tv);
+
+    }
+
+    private void initParams(){
+        Intent intent = getIntent();
+        info = new UserInfo();
+        info = (UserInfo) intent.getSerializableExtra("user_model");
+        userId = info.getUserId();
+        shopId = info.getShopId();
+        params.put("user_id", userId);
+        params.put("shop_id", shopId);
+        noncestr = RandomString.getRandomString(10);
+        params.put("noncestr", noncestr);
+        long time = System.currentTimeMillis();
+        timeStr = time + "";
+        params.put("timestamp", timeStr);
+        params.put("salt", Constant.salt);
+        String string = EncryptParams.getString(params);
+        sign = EncryptParams.md5(EncryptParams.sha1(string));
+        params.put("sign", sign);
     }
 
     private void getOrdersCount(){
+
+        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.ORDER_COUNTS_DATA, params, new VolleyListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+
+            @Override
+            public void onResponse(String s) {
+                Log.e("onResponse", s);
+                try {
+                    JSONObject resp = new JSONObject(s);
+                    String status = resp.getString("status");
+                    if (status.equals("1")){
+                        JSONObject data = resp.getJSONObject("data");
+                        orderCounts = new OrderCounts();
+                        orderCounts.setLow_stack(TextUtil.setNullToEmpty(data.getString("low_stack")));
+                        orderCounts.setAppraisesCount(TextUtil.setNullToEmpty(data.getString("appraisesCount")));
+                        orderCounts.setBeAcceptedCount(TextUtil.setNullToEmpty(data.getString("beAcceptedCount")));
+                        orderCounts.setHasAcceptedCount(TextUtil.setNullToEmpty(data.getString("hasAcceptedCount")));
+                        orderCounts.setPackagedCount(TextUtil.setNullToEmpty(data.getString("packagedCount")));
+                        Log.e("counts", orderCounts.toString());
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+    }
+
+    private void getMallMessageCount(){
+        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.MALL_MESSAGE_COUNT, params, new VolleyListener() {
+            @Override
+            public void onErrorResponse(VolleyError volleyError) {
+
+            }
+
+            @Override
+            public void onResponse(String s) {
+                Log.e("onResponse", s);
+                try {
+                    JSONObject resp = new JSONObject(s);
+                    String status = resp.getString("status");
+                    if (status.equals("1")){
+                        String data = resp.getString("data");
+                        Log.e("data", data);
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    private void initWidgetData(){
+        userNameAndIntegral.setText(TextUtil.setNullToEmpty(info.getUserName() + "  积分:" + TextUtil.setNullToEmpty(info.getUserScore())));
+    }
+
+    private void addTipCounts(){
+        badgeView = new BadgeView(this, myOrder);
+        badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+        badgeView.setText("11");
+        badgeView.setTextSize(11);
+//        badgeView.setTextColor(Color.WHITE);
+//        badgeView.setBackgroundColor(Color.RED);
+        badgeView.show();
 
     }
 
@@ -157,6 +281,10 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
                     }
                 }).setTitle("确定退出登录？").create();
                 quitDialog.show();
+                break;
+
+            case R.id.number_counts:
+                //TODO
                 break;
         }
     }

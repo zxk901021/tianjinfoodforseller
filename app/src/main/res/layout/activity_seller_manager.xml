@@ -366,6 +366,33 @@
                     android:textSize="@dimen/icon_text"/>
 
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/number_counts"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_below="@+id/goods_on_store"
+                android:padding="15dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="数据统计"
+                    android:drawableLeft="@drawable/icon14"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium_size"
+                    android:gravity="center"
+                    android:drawablePadding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&gt;"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/icon_text"/>
+
+            </RelativeLayout>
 
             <Button
                 android:id="@+id/quit_login"
@@ -375,7 +402,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/button_text"
                 android:background="@drawable/corner_button"
-                android:layout_below="@+id/goods_on_store"
+                android:layout_below="@+id/number_counts"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"/>
 

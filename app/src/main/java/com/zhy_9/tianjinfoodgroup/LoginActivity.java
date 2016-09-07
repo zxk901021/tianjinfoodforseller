@@ -14,10 +14,14 @@ import com.android.volley.VolleyError;
 import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
+import com.zhy_9.tianjinfoodgroup.model.UserInfo;
 import com.zhy_9.tianjinfoodgroup.util.Constant;
 import com.zhy_9.tianjinfoodgroup.util.RandomString;
 import com.zhy_9.tianjinfoodgroup.util.ToastUtil;
 import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -94,12 +98,55 @@ public class LoginActivity extends Activity implements View.OnClickListener{
 
                         @Override
                         public void onResponse(String s) {
+                            try {
+                                JSONObject resp = new JSONObject(s);
+                                String status = resp.getString("status");
+                                if (status.equals("1")){
+                                    ToastUtil.showToast(LoginActivity.this, "登录成功！");
+                                    UserInfo info = new UserInfo();
+                                    JSONObject data = resp.getJSONObject("data");
+                                    String shopId = data.getString("shopId");
+                                    String shopSn = data.getString("shopSn");
+                                    String shopName = data.getString("shopName");
+                                    String shopImg = data.getString("shopImg");
+                                    String userId = data.getString("userId");
+                                    String loginName = data.getString("loginName");
+                                    String userSex = data.getString("userSex");
+                                    String userType = data.getString("userType");
+                                    String userName = data.getString("userName");
+                                    String userQQ = data.getString("userQQ");
+                                    String userPhone = data.getString("userPhone");
+                                    String userEmail = data.getString("userEmail");
+                                    String userScore = data.getString("userScore");
+                                    String userPhoto = data.getString("userPhoto");
+                                    info.setShopId(shopId);
+                                    info.setShopImg(shopImg);
+                                    info.setShopName(shopName);
+                                    info.setShopSn(shopSn);
+                                    info.setUserEmail(userEmail);
+                                    info.setUserId(userId);
+                                    info.setUserName(userName);
+                                    info.setUserPhone(userPhone);
+                                    info.setUserQQ(userQQ);
+                                    info.setUserSex(userSex);
+                                    info.setLoginName(loginName);
+                                    info.setUserType(userType);
+                                    info.setUserScore(userScore);
+                                    info.setUserPhoto(userPhoto);
+                                    Intent intent = new Intent(LoginActivity.this, SellerManagerActivity.class);
+                                    Bundle bundle = new Bundle();
+                                    bundle.putSerializable("user_model", info);
+                                    intent.putExtras(bundle);
+                                    startActivity(intent);
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                             Log.e("onResponse", s);
                         }
                     });
                 }
-//                Intent intent = new Intent(LoginActivity.this, SellerManagerActivity.class);
-//                startActivity(intent);
                 break;
 
             case R.id.forget_password:

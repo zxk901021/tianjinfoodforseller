@@ -8,4 +8,11 @@ import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 public class Constant {
 
     public static final String salt = EncryptParams.md5(EncryptParams.sha1("zhihuiyun"));
+
+    public static final String USER_TEL = "user_tel";
+    public static final String NONCESTR = "noncestr";
+    public static final String TIMESTAMP = "timestamp";
+    public static final String SIGN = "sign";
+    public static final String SALT = "salt";
+
 }
