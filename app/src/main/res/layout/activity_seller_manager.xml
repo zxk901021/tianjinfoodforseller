@@ -172,6 +172,7 @@
                     android:singleLine="true"/>
 
             </LinearLayout>
+
             <RelativeLayout
                 android:id="@+id/manager_orders"
                 android:layout_width="match_parent"
@@ -198,7 +199,36 @@
                     android:layout_alignParentRight="true"
                     android:textSize="@dimen/icon_text"/>
 
-                
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/take_by_oneself"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_below="@+id/manager_orders"
+                android:padding="15dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="自提核销"
+                    android:drawableLeft="@drawable/icon7"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium_size"
+                    android:gravity="center"
+                    android:drawablePadding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&gt;"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/icon_text"/>
+
+
 
             </RelativeLayout>
             <RelativeLayout
@@ -206,7 +236,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="1dp"
-                android:layout_below="@+id/manager_orders"
+                android:layout_below="@+id/take_by_oneself"
                 android:padding="15dp"
                 android:background="@color/white">
 
@@ -394,6 +424,34 @@
 
             </RelativeLayout>
 
+            <RelativeLayout
+                android:id="@+id/custom_service"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="1dp"
+                android:layout_below="@+id/number_counts"
+                android:padding="15dp"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="客服系统"
+                    android:drawableLeft="@drawable/icon14"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/text_medium_size"
+                    android:gravity="center"
+                    android:drawablePadding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="&gt;"
+                    android:layout_alignParentRight="true"
+                    android:textSize="@dimen/icon_text"/>
+
+            </RelativeLayout>
+
             <Button
                 android:id="@+id/quit_login"
                 android:layout_width="wrap_content"
@@ -402,7 +460,7 @@
                 android:textColor="@color/white"
                 android:textSize="@dimen/button_text"
                 android:background="@drawable/corner_button"
-                android:layout_below="@+id/number_counts"
+                android:layout_below="@+id/custom_service"
                 android:layout_marginTop="10dp"
                 android:layout_centerHorizontal="true"/>
 

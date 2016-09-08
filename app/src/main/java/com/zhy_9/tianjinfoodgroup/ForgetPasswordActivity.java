@@ -11,11 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
 import com.zhy_9.tianjinfoodgroup.util.Constant;
-import com.zhy_9.tianjinfoodgroup.util.RandomString;
 import com.zhy_9.tianjinfoodgroup.util.ToastUtil;
 import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
 
@@ -33,7 +31,6 @@ public class ForgetPasswordActivity extends Activity implements View.OnClickList
     private Button sendVerifyButton;
     private Button nextStep;
     private String userPhone;
-    private String sign;
     private String verifyCodeFromServer;
 
     @Override
@@ -71,14 +68,8 @@ public class ForgetPasswordActivity extends Activity implements View.OnClickList
                 }else userPhone = phoneNumber.getText().toString();
                 Map<String, String> params = new HashMap<>();
                 params.put(Constant.USER_TEL, userPhone);
-                params.put(Constant.NONCESTR, RandomString.getRandomString(10));
-                params.put(Constant.TIMESTAMP, System.currentTimeMillis() + "");
-                params.put(Constant.SALT, Constant.salt);
-                String signStr = EncryptParams.getString(params);
-                sign = EncryptParams.md5(EncryptParams.sha1(signStr));
-                params.put(Constant.SIGN, sign);
                 params.remove(Constant.SALT);
-                HttpUtil.postVolley(ForgetPasswordActivity.this, UrlUtil.SEND_VERIFY_CODE, params, new VolleyListener() {
+                HttpUtil.postVolley(ForgetPasswordActivity.this, UrlUtil.SEND_VERIFY_CODE, HttpUtil.initParam(params), new VolleyListener() {
                     @Override
                     public void onErrorResponse(VolleyError volleyError) {
                         Log.e("onErrorResponse", volleyError.toString());

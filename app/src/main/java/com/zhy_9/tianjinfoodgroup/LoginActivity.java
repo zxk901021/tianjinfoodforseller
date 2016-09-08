@@ -11,12 +11,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
 import com.zhy_9.tianjinfoodgroup.model.UserInfo;
-import com.zhy_9.tianjinfoodgroup.util.Constant;
-import com.zhy_9.tianjinfoodgroup.util.RandomString;
 import com.zhy_9.tianjinfoodgroup.util.ToastUtil;
 import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
 
@@ -34,9 +31,6 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private EditText password;
     private String usernameStr;
     private String passwordStr;
-    private String noncestr;
-    private String timeStr;
-    private String sign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,18 +73,9 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     Map<String, String> params = new HashMap<>();
                     params.put("username", usernameStr);
                     params.put("password", passwordStr);
-                    noncestr = RandomString.getRandomString(10);
-                    params.put("noncestr", noncestr);
-                    long time = System.currentTimeMillis();
-                    timeStr = time + "";
-                    params.put("timestamp", timeStr);
-                    params.put("salt", Constant.salt);
-                    String string = EncryptParams.getString(params);
-                    sign = EncryptParams.md5(EncryptParams.sha1(string));
-                    params.put("sign", sign);
 
                     Log.e("params", params.entrySet().toString());
-                    HttpUtil.postVolley(LoginActivity.this, UrlUtil.USER_LOGIN, params, new VolleyListener() {
+                    HttpUtil.postVolley(LoginActivity.this, UrlUtil.USER_LOGIN, HttpUtil.initParam(params), new VolleyListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             Log.e("onErrorResponse", volleyError.toString());

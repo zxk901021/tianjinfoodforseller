@@ -12,6 +12,9 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
+import com.zhy_9.tianjinfoodgroup.util.Constant;
+import com.zhy_9.tianjinfoodgroup.util.RandomString;
 
 import java.util.Map;
 
@@ -22,6 +25,24 @@ public class HttpUtil {
 
     private static RequestQueue mRequestQueue;
     private static ImageLoader mImageLoader;
+
+
+    private static String noncestr;
+    private static String timeStr;
+    private static String sign;
+
+    public static Map<String, String> initParam(Map<String, String> params){
+        noncestr = RandomString.getRandomString(10);
+        params.put("noncestr", noncestr);
+        long time = System.currentTimeMillis();
+        timeStr = time + "";
+        params.put("timestamp", timeStr);
+        params.put("salt", Constant.salt);
+        String string = EncryptParams.getString(params);
+        sign = EncryptParams.md5(EncryptParams.sha1(string));
+        params.put("sign", sign);
+        return params;
+    }
 
     public static void init(Context context) {
         mRequestQueue = Volley.newRequestQueue(context);

@@ -5,17 +5,15 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
-import com.zhy_9.tianjinfoodgroup.util.Constant;
-import com.zhy_9.tianjinfoodgroup.util.RandomString;
 import com.zhy_9.tianjinfoodgroup.util.ToastUtil;
 import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
 
@@ -35,9 +33,6 @@ public class SetPasswordActivity extends AppCompatActivity implements View.OnCli
     private String verifyCode;
     private String newPass;
     private String newPassVerify;
-    private String noncestr;
-    private String timeStr;
-    private String sign;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -115,21 +110,14 @@ public class SetPasswordActivity extends AppCompatActivity implements View.OnCli
                 break;
 
             case R.id.submit_change_password:
+                newPass = newPassword.getText().toString();
                 Map<String, String> params = new HashMap<>();
                 params.put("user_tel", tel);
                 params.put("verify_code", verifyCode);
                 params.put("new_password", newPass);
-                noncestr = RandomString.getRandomString(10);
-                params.put("noncestr", noncestr);
-                long time = System.currentTimeMillis();
-                timeStr = time + "";
-                params.put("timestamp", timeStr);
-                params.put("salt", Constant.salt);
-                String string = EncryptParams.getString(params);
-                sign = EncryptParams.md5(EncryptParams.sha1(string));
-                params.put("sign", sign);
                 params.remove("salt");
-                HttpUtil.postVolley(SetPasswordActivity.this, UrlUtil.SET_NEW_PASSWORD, params, new VolleyListener() {
+                Log.e("param", params.toString());
+                HttpUtil.postVolley(SetPasswordActivity.this, UrlUtil.SET_NEW_PASSWORD, HttpUtil.initParam(params), new VolleyListener() {
                     @Override
                     public void onResponse(String s) {
                         try {
@@ -138,6 +126,7 @@ public class SetPasswordActivity extends AppCompatActivity implements View.OnCli
                             String message = resp.getString("message");
                             if (status.equals("1")){
                                 ToastUtil.showToast(SetPasswordActivity.this, message);
+                                Log.e("resp", message);
                             }else ToastUtil.showToast(SetPasswordActivity.this, message);
 
                         } catch (JSONException e) {

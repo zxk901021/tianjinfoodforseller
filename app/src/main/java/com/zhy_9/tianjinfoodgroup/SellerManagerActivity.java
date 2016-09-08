@@ -8,17 +8,15 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
 import com.zhy_9.tianjinfoodgroup.model.OrderCounts;
 import com.zhy_9.tianjinfoodgroup.model.UserInfo;
-import com.zhy_9.tianjinfoodgroup.util.Constant;
-import com.zhy_9.tianjinfoodgroup.util.RandomString;
 import com.zhy_9.tianjinfoodgroup.util.TextUtil;
 import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
 import com.zhy_9.tianjinfoodgroup.view.BadgeView;
@@ -47,8 +45,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private TextView myOrder;
     private String userId;
     private String shopId;
-    private String noncestr, sign, timeStr;
     private OrderCounts orderCounts;
+    private ImageView userPortrait;
     private Map<String, String> params = new HashMap<>();
 
     @Override
@@ -97,10 +95,10 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         numberCounts.setOnClickListener(this);
         userNameAndIntegral = (TextView) findViewById(R.id.user_name_and_integral);
         myOrder = (TextView) findViewById(R.id.my_order_tv);
-
+        userPortrait = (ImageView) findViewById(R.id.seller_portrait);
     }
 
-    private void initParams(){
+    private void initParams() {
         Intent intent = getIntent();
         info = new UserInfo();
         info = (UserInfo) intent.getSerializableExtra("user_model");
@@ -108,20 +106,12 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         shopId = info.getShopId();
         params.put("user_id", userId);
         params.put("shop_id", shopId);
-        noncestr = RandomString.getRandomString(10);
-        params.put("noncestr", noncestr);
-        long time = System.currentTimeMillis();
-        timeStr = time + "";
-        params.put("timestamp", timeStr);
-        params.put("salt", Constant.salt);
-        String string = EncryptParams.getString(params);
-        sign = EncryptParams.md5(EncryptParams.sha1(string));
-        params.put("sign", sign);
+
     }
 
-    private void getOrdersCount(){
+    private void getOrdersCount() {
 
-        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.ORDER_COUNTS_DATA, params, new VolleyListener() {
+        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.ORDER_COUNTS_DATA, HttpUtil.initParam(params), new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
@@ -133,7 +123,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
                 try {
                     JSONObject resp = new JSONObject(s);
                     String status = resp.getString("status");
-                    if (status.equals("1")){
+                    if (status.equals("1")) {
                         JSONObject data = resp.getJSONObject("data");
                         orderCounts = new OrderCounts();
                         orderCounts.setLow_stack(TextUtil.setNullToEmpty(data.getString("low_stack")));
@@ -151,8 +141,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
     }
 
-    private void getMallMessageCount(){
-        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.MALL_MESSAGE_COUNT, params, new VolleyListener() {
+    private void getMallMessageCount() {
+        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.MALL_MESSAGE_COUNT, HttpUtil.initParam(params), new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
@@ -164,7 +154,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
                 try {
                     JSONObject resp = new JSONObject(s);
                     String status = resp.getString("status");
-                    if (status.equals("1")){
+                    if (status.equals("1")) {
                         String data = resp.getString("data");
                         Log.e("data", data);
                     }
@@ -175,11 +165,11 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         });
     }
 
-    private void initWidgetData(){
+    private void initWidgetData() {
         userNameAndIntegral.setText(TextUtil.setNullToEmpty(info.getUserName() + "  积分:" + TextUtil.setNullToEmpty(info.getUserScore())));
     }
 
-    private void addTipCounts(){
+    private void addTipCounts() {
         badgeView = new BadgeView(this, myOrder);
         badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
         badgeView.setText("11");
@@ -196,6 +186,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.my_order:
                 Intent orderListIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
+                orderListIntent.putExtra("userId", userId);
+                orderListIntent.putExtra("shopId", shopId);
                 startActivity(orderListIntent);
                 break;
 
@@ -253,6 +245,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             case R.id.account_security:
                 Intent accountSecurityIntent = new Intent(SellerManagerActivity.this, AccountSecurityActivity.class);
+                accountSecurityIntent.putExtra("userId", userId);
                 startActivity(accountSecurityIntent);
                 break;
 
