@@ -119,7 +119,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             @Override
             public void onResponse(String s) {
-                Log.e("onResponse", s);
+                Log.e("onResponseOrder", s);
                 try {
                     JSONObject resp = new JSONObject(s);
                     String status = resp.getString("status");
@@ -150,7 +150,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             @Override
             public void onResponse(String s) {
-                Log.e("onResponse", s);
+                Log.e("onResponseMessage", s);
                 try {
                     JSONObject resp = new JSONObject(s);
                     String status = resp.getString("status");

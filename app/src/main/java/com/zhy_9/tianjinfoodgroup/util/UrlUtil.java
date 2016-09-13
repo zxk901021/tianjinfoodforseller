@@ -4,7 +4,7 @@ package com.zhy_9.tianjinfoodgroup.util;
  * Created by ZHY_9 on 2016/8/30.
  */
 public class UrlUtil {
-    public static final String BASE_URL = "http://172.22.35.3/";
+    public static final String BASE_URL = "http://192.168.0.108/";
     public static final String USER_LOGIN = BASE_URL + "shipin/index.php/WapApp/user/user_login";
     public static final String SEND_VERIFY_CODE = BASE_URL + "shipin/index.php/WapApp/user/send_user_verify";
     public static final String SET_NEW_PASSWORD = BASE_URL + "shipin/index.php/WapApp/user/reset_password";
@@ -13,7 +13,7 @@ public class UrlUtil {
     public static final String MODIFY_PASSWORD = BASE_URL + "shipin/index.php/WapApp/user/modify_password";
     public static final String ORDER_CATEGORY = BASE_URL + "shipin/index.php/WapApp/order/order_category";
 
-
+//15022527660
 
     public static final String GOODS_DETAIL_URL = "/index.php/Manage/Orders/index.html#details&";
 
