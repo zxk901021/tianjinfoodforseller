@@ -16,7 +16,6 @@ import com.android.volley.toolbox.Volley;
 import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.util.Constant;
 import com.zhy_9.tianjinfoodgroup.util.RandomString;
-import com.zhy_9.tianjinfoodgroup.util.ToastUtil;
 
 import java.util.Map;
 
@@ -44,8 +43,8 @@ public class HttpUtil {
         String string = EncryptParams.getString(params);
         sign = EncryptParams.md5(EncryptParams.sha1(string));
         params.put(Constant.SIGN, sign);
-        Log.e("params", params.toString());
-        ToastUtil.showToast(context, params.toString());
+//        ToastUtil.showToast(context, params.toString());
+        Log.e("param", params.toString());
         return params;
     }
 

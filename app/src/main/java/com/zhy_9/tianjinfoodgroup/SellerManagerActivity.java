@@ -4,10 +4,8 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -173,22 +171,22 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     }
 
     private void addTipCounts() {
-//        badgeView = new BadgeView(this, myOrder);
-//        badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-//        badgeView.setText("11");
-//        badgeView.setTextSize(11);
-////        badgeView.setTextColor(Color.WHITE);
-////        badgeView.setBackgroundColor(Color.RED);
-//        badgeView.show();
-        badgeView = new BadgeView(SellerManagerActivity.this);
-        badgeView.setTargetView(myOrder);
-        badgeView.setBadgeMargin(0, 5, 15, 0);
-        badgeView.setBadgeCount(11);
-        badgeView.setTextColor(Color.RED);
-        badgeView.setBackgroundColor(Color.WHITE);
-        badgeView.setTextSize(24);
-        badgeView.setBadgeGravity(Gravity.RIGHT | Gravity.TOP);
-//        badgeView.setBadgeGravity(BadgeView.SCROLLBAR_POSITION_RIGHT);
+////        badgeView = new BadgeView(this, myOrder);
+////        badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+////        badgeView.setText("11");
+////        badgeView.setTextSize(11);
+//////        badgeView.setTextColor(Color.WHITE);
+//////        badgeView.setBackgroundColor(Color.RED);
+////        badgeView.show();
+//        badgeView = new BadgeView(SellerManagerActivity.this);
+//        badgeView.setTargetView(myOrder);
+//        badgeView.setBadgeMargin(0, 5, 15, 0);
+//        badgeView.setBadgeCount(11);
+//        badgeView.setTextColor(Color.RED);
+//        badgeView.setBackgroundColor(Color.WHITE);
+//        badgeView.setTextSize(24);
+//        badgeView.setBadgeGravity(Gravity.RIGHT | Gravity.TOP);
+////        badgeView.setBadgeGravity(BadgeView.SCROLLBAR_POSITION_RIGHT);
 
     }
 

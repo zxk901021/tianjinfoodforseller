@@ -98,78 +98,156 @@
                 android:background="@color/white"
                 android:padding="8dp">
 
-            <TextView
-                android:id="@+id/low_inventory"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="库存低"
-                android:textSize="@dimen/text_medium_size"
-                android:textColor="@color/black"
-                android:gravity="center"
-                android:drawableTop="@drawable/icon1"
-                android:drawablePadding="10dp"
-                android:singleLine="true"/>
-                <TextView
-                    android:id="@+id/wait_handle"
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="待受理"
-                    android:textSize="@dimen/text_medium_size"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/icon2"
-                    android:drawablePadding="10dp"
-                    android:singleLine="true"/>
-                <TextView
-                    android:id="@+id/handled"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/low_inventory"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="库存低"
+                        android:textSize="@dimen/text_medium_size"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/icon1"
+                        android:drawablePadding="10dp"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/low_inventory_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:background="@drawable/count_text"
+                        android:textColor="@color/white"
+                        android:text="11"/>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="已受理"
-                    android:textSize="@dimen/text_medium_size"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/icon3"
-                    android:drawablePadding="10dp"
-                    android:singleLine="true"/>
-                <TextView
-                    android:id="@+id/packaging"
+                    android:gravity="center">
+                    <TextView
+                        android:id="@+id/wait_handle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="待受理"
+                        android:textSize="@dimen/text_medium_size"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/icon2"
+                        android:drawablePadding="10dp"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/wait_handle_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/count_text"
+                        android:textColor="@color/white"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="打包中"
-                    android:textSize="@dimen/text_medium_size"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/icon4"
-                    android:drawablePadding="10dp"
-                    android:singleLine="true"/>
-                <TextView
-                    android:id="@+id/deliverying"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/handled"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="已受理"
+                        android:textSize="@dimen/text_medium_size"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/icon3"
+                        android:drawablePadding="10dp"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/hanlded_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:background="@drawable/count_text"/>
+                </RelativeLayout>
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="配送中"
-                    android:textSize="@dimen/text_medium_size"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/icon5"
-                    android:drawablePadding="10dp"
-                    android:singleLine="true"/>
-                <TextView
-                    android:id="@+id/problem_package"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/packaging"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="打包中"
+                        android:textSize="@dimen/text_medium_size"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/icon4"
+                        android:drawablePadding="10dp"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/packaging_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:textColor="@color/white"
+                        android:background="@drawable/count_text"/>
+                </RelativeLayout>
+
+                <RelativeLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="问题件"
-                    android:textSize="@dimen/text_medium_size"
-                    android:textColor="@color/black"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/icon6"
-                    android:drawablePadding="10dp"
-                    android:singleLine="true"/>
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/deliverying"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="配送中"
+                        android:textSize="@dimen/text_medium_size"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/icon5"
+                        android:drawablePadding="10dp"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/deliverying_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:background="@drawable/count_text"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1">
+                    <TextView
+                        android:id="@+id/problem_package"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="问题件"
+                        android:textSize="@dimen/text_medium_size"
+                        android:textColor="@color/black"
+                        android:gravity="center"
+                        android:drawableTop="@drawable/icon6"
+                        android:drawablePadding="10dp"
+                        android:maxLines="1"/>
+                    <TextView
+                        android:id="@+id/problem_package_count"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/white"
+                        android:background="@drawable/count_text"
+                        android:layout_alignParentRight="true"/>
+                </RelativeLayout>
+
+
 
             </LinearLayout>
 

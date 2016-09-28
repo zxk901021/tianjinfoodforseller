@@ -13,4 +13,5 @@
     <color name="red">#c80000</color>
     <color name="main_text">#505050</color>
     <color name="assis_text">#999999</color>
+    <color name="red_counts">#E23C3C</color>
 </resources>
