@@ -20,7 +20,7 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AccountSecurityActivity extends AppCompatActivity implements View.OnClickListener{
+public class AccountSecurityActivity extends AppCompatActivity implements View.OnClickListener {
 
     private TextView back;
     private String userId;
@@ -36,12 +36,11 @@ public class AccountSecurityActivity extends AppCompatActivity implements View.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_security);
-
         initView();
         getIntentData();
     }
 
-    private void initView(){
+    private void initView() {
         back = (TextView) findViewById(R.id.account_security_back);
         back.setOnClickListener(this);
         oldEdit = (EditText) findViewById(R.id.old_password_edt);
@@ -51,14 +50,14 @@ public class AccountSecurityActivity extends AppCompatActivity implements View.O
         submit.setOnClickListener(this);
     }
 
-    private void getIntentData(){
+    private void getIntentData() {
         Intent intent = getIntent();
         userId = intent.getStringExtra("userId");
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.account_security_back:
                 finish();
                 break;
@@ -83,9 +82,9 @@ public class AccountSecurityActivity extends AppCompatActivity implements View.O
                             JSONObject resp = new JSONObject(s);
                             String status = resp.getString("status");
                             String message = resp.getString("message");
-                            if (status.equals("1")){
+                            if (status.equals("1")) {
                                 ToastUtil.showToast(AccountSecurityActivity.this, "修改成功！");
-                            }else ToastUtil.showToast(AccountSecurityActivity.this, message);
+                            } else ToastUtil.showToast(AccountSecurityActivity.this, message);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -2,6 +2,7 @@ package com.zhy_9.tianjinfoodgroup.httputil;
 
 import android.app.ActivityManager;
 import android.content.Context;
+import android.util.Log;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
@@ -15,6 +16,7 @@ import com.android.volley.toolbox.Volley;
 import com.zhy_9.tianjinfoodgroup.encrypt.EncryptParams;
 import com.zhy_9.tianjinfoodgroup.util.Constant;
 import com.zhy_9.tianjinfoodgroup.util.RandomString;
+import com.zhy_9.tianjinfoodgroup.util.ToastUtil;
 
 import java.util.Map;
 
@@ -30,21 +32,25 @@ public class HttpUtil {
     private static String noncestr;
     private static String timeStr;
     private static String sign;
+    public static Context context;
 
     public static Map<String, String> initParam(Map<String, String> params){
         noncestr = RandomString.getRandomString(10);
-        params.put("noncestr", noncestr);
+        params.put(Constant.NONCESTR, noncestr);
         long time = System.currentTimeMillis();
         timeStr = time + "";
-        params.put("timestamp", timeStr);
-        params.put("salt", Constant.salt);
+        params.put(Constant.TIMESTAMP, timeStr);
+        params.put(Constant.SALT, Constant.salt);
         String string = EncryptParams.getString(params);
         sign = EncryptParams.md5(EncryptParams.sha1(string));
-        params.put("sign", sign);
+        params.put(Constant.SIGN, sign);
+        Log.e("params", params.toString());
+        ToastUtil.showToast(context, params.toString());
         return params;
     }
 
     public static void init(Context context) {
+        HttpUtil.context = context;
         mRequestQueue = Volley.newRequestQueue(context);
         int memClass = ((ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE)).getMemoryClass();
         int cacheSize = 1024 * 1024 * memClass / 8;

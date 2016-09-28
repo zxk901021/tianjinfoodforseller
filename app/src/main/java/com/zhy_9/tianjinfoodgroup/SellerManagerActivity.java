@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,19 +15,20 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
+import com.jauker.widget.BadgeView;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
 import com.zhy_9.tianjinfoodgroup.model.OrderCounts;
 import com.zhy_9.tianjinfoodgroup.model.UserInfo;
 import com.zhy_9.tianjinfoodgroup.util.TextUtil;
 import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
-import com.zhy_9.tianjinfoodgroup.view.BadgeView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+
 
 public class SellerManagerActivity extends Activity implements View.OnClickListener {
 
@@ -38,8 +41,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private RelativeLayout accountSecurity;
     private RelativeLayout mallMessage;
     private RelativeLayout numberCounts;
-    private Button quitLogin;
     private BadgeView badgeView;
+    private Button quitLogin;
     private UserInfo info;
     private TextView userNameAndIntegral;
     private TextView myOrder;
@@ -170,13 +173,22 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     }
 
     private void addTipCounts() {
-        badgeView = new BadgeView(this, myOrder);
-        badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-        badgeView.setText("11");
-        badgeView.setTextSize(11);
-//        badgeView.setTextColor(Color.WHITE);
-//        badgeView.setBackgroundColor(Color.RED);
-        badgeView.show();
+//        badgeView = new BadgeView(this, myOrder);
+//        badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
+//        badgeView.setText("11");
+//        badgeView.setTextSize(11);
+////        badgeView.setTextColor(Color.WHITE);
+////        badgeView.setBackgroundColor(Color.RED);
+//        badgeView.show();
+        badgeView = new BadgeView(SellerManagerActivity.this);
+        badgeView.setTargetView(myOrder);
+        badgeView.setBadgeMargin(0, 5, 15, 0);
+        badgeView.setBadgeCount(11);
+        badgeView.setTextColor(Color.RED);
+        badgeView.setBackgroundColor(Color.WHITE);
+        badgeView.setTextSize(24);
+        badgeView.setBadgeGravity(Gravity.RIGHT | Gravity.TOP);
+//        badgeView.setBadgeGravity(BadgeView.SCROLLBAR_POSITION_RIGHT);
 
     }
 

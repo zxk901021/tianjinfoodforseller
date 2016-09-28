@@ -31,6 +31,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
     private EditText password;
     private String usernameStr;
     private String passwordStr;
+    private EditText verifyEdt;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +39,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         setContentView(R.layout.activity_login);
 
         initView();
+        ToastUtil.showToast(LoginActivity.this, "111111");
 
     }
 
@@ -48,6 +50,7 @@ public class LoginActivity extends Activity implements View.OnClickListener{
         forgetPassword.setOnClickListener(this);
         userName = (EditText) findViewById(R.id.seller_login_username);
         password = (EditText) findViewById(R.id.seller_login_password);
+        verifyEdt = (EditText) findViewById(R.id.seller_verify_edt);
     }
 
     private boolean getUserData(){
@@ -75,10 +78,13 @@ public class LoginActivity extends Activity implements View.OnClickListener{
                     params.put("password", passwordStr);
 
                     Log.e("params", params.entrySet().toString());
+//                    String temp = HttpUtil.initParam(params).toString();
+//                    verifyEdt.setText(temp);
                     HttpUtil.postVolley(LoginActivity.this, UrlUtil.USER_LOGIN, HttpUtil.initParam(params), new VolleyListener() {
                         @Override
                         public void onErrorResponse(VolleyError volleyError) {
                             Log.e("onErrorResponse", volleyError.toString());
+                            ToastUtil.showToast(LoginActivity.this, volleyError.toString());
                         }
 
                         @Override
