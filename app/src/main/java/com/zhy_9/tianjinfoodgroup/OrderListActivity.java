@@ -47,7 +47,6 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
         params.put("user_id", userId);
         params.put("shop_id", shopId);
         params.put("order_type", "all");
-
         HttpUtil.postVolley(OrderListActivity.this, UrlUtil.ORDER_CATEGORY, HttpUtil.initParam(params), new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {

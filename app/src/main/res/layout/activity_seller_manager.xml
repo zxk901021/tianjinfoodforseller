@@ -121,7 +121,10 @@
                         android:layout_alignParentRight="true"
                         android:background="@drawable/count_text"
                         android:textColor="@color/white"
-                        android:text="11"/>
+                        android:text="11"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="5dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -146,7 +149,11 @@
                         android:layout_height="wrap_content"
                         android:background="@drawable/count_text"
                         android:textColor="@color/white"
-                        android:layout_alignParentRight="true"/>
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="5dp"/>
+
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -165,12 +172,15 @@
                         android:drawablePadding="10dp"
                         android:maxLines="1"/>
                     <TextView
-                        android:id="@+id/hanlded_count"
+                        android:id="@+id/handled_count"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:textColor="@color/white"
-                        android:background="@drawable/count_text"/>
+                        android:background="@drawable/count_text"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="5dp"/>
                 </RelativeLayout>
                 <RelativeLayout
                     android:layout_width="0dp"
@@ -194,7 +204,10 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentRight="true"
                         android:textColor="@color/white"
-                        android:background="@drawable/count_text"/>
+                        android:background="@drawable/count_text"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="5dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -219,7 +232,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:background="@drawable/count_text"
-                        android:layout_alignParentRight="true"/>
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="5dp"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -244,7 +260,10 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
                         android:background="@drawable/count_text"
-                        android:layout_alignParentRight="true"/>
+                        android:layout_alignParentRight="true"
+                        android:paddingLeft="5dp"
+                        android:paddingRight="5dp"
+                        android:layout_marginRight="5dp"/>
                 </RelativeLayout>
 
 
@@ -346,6 +365,7 @@
                 android:background="@color/white">
 
                 <TextView
+                    android:id="@+id/mall_msg_tv"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="商城消息"
@@ -354,6 +374,16 @@
                     android:textSize="@dimen/text_medium_size"
                     android:gravity="center"
                     android:drawablePadding="10dp"/>
+                <TextView
+                    android:id="@+id/mall_msg_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/count_text"
+                    android:layout_toRightOf="@+id/mall_msg_tv"
+                    android:layout_marginLeft="5dp"
+                    android:text="11"
+                    android:textColor="@color/white"
+                    />
 
                 <TextView
                     android:layout_width="wrap_content"

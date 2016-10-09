@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/white">
 
     <TextView
         android:id="@+id/goods_list_back"
@@ -35,53 +36,13 @@
         android:background="@color/separate_line" />
 
     <LinearLayout
-        android:id="@+id/goods_top_menu"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/goods_list_separate_line"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/goods_select_time"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="时间"
-            android:textColor="@color/black"
-            android:textSize="@dimen/button_text"
-            android:gravity="center"
-            android:padding="10dp"/>
-
-        <TextView
-            android:id="@+id/goods_select_price"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="价格"
-            android:textColor="@color/black"
-            android:textSize="@dimen/button_text"
-            android:gravity="center"
-            android:padding="10dp"/>
-
-        <TextView
-            android:id="@+id/goods_select_account"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="销量"
-            android:textColor="@color/black"
-            android:textSize="@dimen/button_text"
-            android:gravity="center"
-            android:padding="10dp"/>
-    </LinearLayout>
-
-    <LinearLayout
         android:id="@+id/goods_bottom_menu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical"
-        android:paddingBottom="10dp">
+        android:paddingBottom="10dp"
+        android:background="@color/white">
 
         <LinearLayout
             android:id="@+id/select_layout"
@@ -163,5 +124,50 @@
 
 
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/goods_top_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_alignTop="@+id/goods_list_separate_line"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <TextView
+            android:id="@+id/goods_select_time"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="时间"
+            android:textColor="@color/black"
+            android:textSize="@dimen/button_text"
+            android:gravity="center"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/goods_select_price"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="价格"
+            android:textColor="@color/black"
+            android:textSize="@dimen/button_text"
+            android:gravity="center"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/goods_select_account"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="销量"
+            android:textColor="@color/black"
+            android:textSize="@dimen/button_text"
+            android:gravity="center"
+            android:padding="10dp"/>
+    </LinearLayout>
+
+
 
 </RelativeLayout>

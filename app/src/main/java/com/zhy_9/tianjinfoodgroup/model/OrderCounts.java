@@ -9,6 +9,7 @@ public class OrderCounts {
     private String hasAcceptedCount;
     private String packagedCount;
     private String appraisesCount;
+    private String problemCount;
 
     public OrderCounts() {
     }
@@ -53,6 +54,14 @@ public class OrderCounts {
         this.appraisesCount = appraisesCount;
     }
 
+    public String getProblemCount() {
+        return problemCount;
+    }
+
+    public void setProblemCount(String problemCount) {
+        this.problemCount = problemCount;
+    }
+
     @Override
     public String toString() {
         return "OrderCounts{" +
@@ -61,6 +70,7 @@ public class OrderCounts {
                 ", hasAcceptedCount='" + hasAcceptedCount + '\'' +
                 ", packagedCount='" + packagedCount + '\'' +
                 ", appraisesCount='" + appraisesCount + '\'' +
+                ", problemCount='" + problemCount + '\'' +
                 '}';
     }
 }

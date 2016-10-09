@@ -43,8 +43,7 @@ public class HttpUtil {
         String string = EncryptParams.getString(params);
         sign = EncryptParams.md5(EncryptParams.sha1(string));
         params.put(Constant.SIGN, sign);
-//        ToastUtil.showToast(context, params.toString());
-        Log.e("param", params.toString());
+        Log.e("params", params.toString());
         return params;
     }
 

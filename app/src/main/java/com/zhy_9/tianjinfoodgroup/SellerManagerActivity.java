@@ -5,6 +5,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +16,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.android.volley.VolleyError;
-import com.jauker.widget.BadgeView;
 import com.zhy_9.tianjinfoodgroup.httputil.HttpUtil;
 import com.zhy_9.tianjinfoodgroup.httputil.VolleyListener;
 import com.zhy_9.tianjinfoodgroup.model.OrderCounts;
@@ -35,11 +37,11 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private RelativeLayout onStoreGoods;
     private RelativeLayout onSellingGoods;
     private TextView lowInventory, waitHandle, handled, packaging, deliverying, problemPackage;
+    private TextView lowInventoryCount, waitHandleCount, handledCount, packagingCount, deliveryingCount, problemPackageCount;
     private RelativeLayout managerOrder;
     private RelativeLayout accountSecurity;
     private RelativeLayout mallMessage;
     private RelativeLayout numberCounts;
-    private BadgeView badgeView;
     private Button quitLogin;
     private UserInfo info;
     private TextView userNameAndIntegral;
@@ -49,6 +51,9 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private OrderCounts orderCounts;
     private ImageView userPortrait;
     private Map<String, String> params = new HashMap<>();
+    private String orderResponse;
+    private TextView mallMessageCount;
+    private String messageResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +63,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         initView();
         initParams();
         getOrdersCount();
-        getMallMessageCount();
         initWidgetData();
-        addTipCounts();
+
     }
 
     private void initView() {
@@ -97,6 +101,13 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         userNameAndIntegral = (TextView) findViewById(R.id.user_name_and_integral);
         myOrder = (TextView) findViewById(R.id.my_order_tv);
         userPortrait = (ImageView) findViewById(R.id.seller_portrait);
+        lowInventoryCount = (TextView) findViewById(R.id.low_inventory_count);
+        waitHandleCount = (TextView) findViewById(R.id.wait_handle_count);
+        handledCount = (TextView) findViewById(R.id.handled_count);
+        packagingCount = (TextView) findViewById(R.id.packaging_count);
+        deliveryingCount = (TextView) findViewById(R.id.deliverying_count);
+        problemPackageCount = (TextView) findViewById(R.id.problem_package_count);
+        mallMessageCount = (TextView) findViewById(R.id.mall_msg_count);
     }
 
     private void initParams() {
@@ -110,8 +121,49 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
     }
 
-    private void getOrdersCount() {
+    Handler handler = new Handler() {
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what) {
 
+                case 1:
+                    try {
+                        JSONObject resp = new JSONObject(orderResponse);
+                        String status = resp.getString("status");
+                        if (status.equals("1")) {
+                            JSONObject data = resp.getJSONObject("data");
+                            orderCounts = new OrderCounts();
+                            orderCounts.setLow_stack(TextUtil.setNullToEmpty(data.getString("low_stack")));
+                            orderCounts.setAppraisesCount(TextUtil.setNullToEmpty(data.getString("appraisesCount")));
+                            orderCounts.setBeAcceptedCount(TextUtil.setNullToEmpty(data.getString("beAcceptedCount")));
+                            orderCounts.setHasAcceptedCount(TextUtil.setNullToEmpty(data.getString("hasAcceptedCount")));
+                            orderCounts.setPackagedCount(TextUtil.setNullToEmpty(data.getString("packagedCount")));
+                            Log.e("counts", orderCounts.toString());
+                            addTipCounts();
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    break;
+                case 2:
+                    try {
+                        JSONObject resp = new JSONObject(messageResponse);
+                        String status = resp.getString("status");
+                        if (status.equals("1")) {
+                            String data = resp.getString("data");
+                            mallMessageCount.setText(data);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                    break;
+
+            }
+        }
+    };
+
+    private void getOrdersCount() {
         HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.ORDER_COUNTS_DATA, HttpUtil.initParam(params), new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
@@ -120,30 +172,13 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             @Override
             public void onResponse(String s) {
-                Log.e("onResponseOrder", s);
-                try {
-                    JSONObject resp = new JSONObject(s);
-                    String status = resp.getString("status");
-                    if (status.equals("1")) {
-                        JSONObject data = resp.getJSONObject("data");
-                        orderCounts = new OrderCounts();
-                        orderCounts.setLow_stack(TextUtil.setNullToEmpty(data.getString("low_stack")));
-                        orderCounts.setAppraisesCount(TextUtil.setNullToEmpty(data.getString("appraisesCount")));
-                        orderCounts.setBeAcceptedCount(TextUtil.setNullToEmpty(data.getString("beAcceptedCount")));
-                        orderCounts.setHasAcceptedCount(TextUtil.setNullToEmpty(data.getString("hasAcceptedCount")));
-                        orderCounts.setPackagedCount(TextUtil.setNullToEmpty(data.getString("packagedCount")));
-                        Log.e("counts", orderCounts.toString());
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Log.e("Order", s);
+                orderResponse = s;
+                handler.sendEmptyMessage(1);
+
             }
         });
-
-    }
-
-    private void getMallMessageCount() {
-        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.MALL_MESSAGE_COUNT, HttpUtil.initParam(params), new VolleyListener() {
+        HttpUtil.postVolley(SellerManagerActivity.this, UrlUtil.MALL_MESSAGE_COUNT, params, new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
@@ -151,43 +186,26 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             @Override
             public void onResponse(String s) {
-                Log.e("onResponseMessage", s);
-                try {
-                    JSONObject resp = new JSONObject(s);
-                    String status = resp.getString("status");
-                    if (status.equals("1")) {
-                        String data = resp.getString("data");
-                        Log.e("data", data);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+                Log.e("Message", s);
+                messageResponse = s;
+                handler.sendEmptyMessage(2);
+
             }
         });
+
     }
+
 
     private void initWidgetData() {
         userNameAndIntegral.setText(TextUtil.setNullToEmpty(info.getUserName() + "  积分:" + TextUtil.setNullToEmpty(info.getUserScore())));
     }
 
     private void addTipCounts() {
-////        badgeView = new BadgeView(this, myOrder);
-////        badgeView.setBadgePosition(BadgeView.POSITION_TOP_RIGHT);
-////        badgeView.setText("11");
-////        badgeView.setTextSize(11);
-//////        badgeView.setTextColor(Color.WHITE);
-//////        badgeView.setBackgroundColor(Color.RED);
-////        badgeView.show();
-//        badgeView = new BadgeView(SellerManagerActivity.this);
-//        badgeView.setTargetView(myOrder);
-//        badgeView.setBadgeMargin(0, 5, 15, 0);
-//        badgeView.setBadgeCount(11);
-//        badgeView.setTextColor(Color.RED);
-//        badgeView.setBackgroundColor(Color.WHITE);
-//        badgeView.setTextSize(24);
-//        badgeView.setBadgeGravity(Gravity.RIGHT | Gravity.TOP);
-////        badgeView.setBadgeGravity(BadgeView.SCROLLBAR_POSITION_RIGHT);
-
+        lowInventoryCount.setText(TextUtils.isEmpty(orderCounts.getLow_stack()) ? "" : orderCounts.getLow_stack());
+        waitHandleCount.setText(TextUtils.isEmpty(orderCounts.getBeAcceptedCount()) ? "" : orderCounts.getBeAcceptedCount());
+        handledCount.setText(TextUtils.isEmpty(orderCounts.getHasAcceptedCount()) ? "" : orderCounts.getHasAcceptedCount());
+        packagingCount.setText(TextUtils.isEmpty(orderCounts.getPackagedCount()) ? "" : orderCounts.getPackagedCount());
+        deliveryingCount.setText(TextUtils.isEmpty(orderCounts.getAppraisesCount()) ? "" : orderCounts.getAppraisesCount());
     }
 
 
