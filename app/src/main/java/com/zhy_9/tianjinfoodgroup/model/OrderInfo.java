@@ -6,4 +6,6 @@ package com.zhy_9.tianjinfoodgroup.model;
 
 public class OrderInfo {
 
+
+
 }

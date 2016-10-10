@@ -42,10 +42,10 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private RelativeLayout accountSecurity;
     private RelativeLayout mallMessage;
     private RelativeLayout numberCounts;
+    private RelativeLayout manageEvaluate;
     private Button quitLogin;
     private UserInfo info;
     private TextView userNameAndIntegral;
-    private TextView myOrder;
     private String userId;
     private String shopId;
     private OrderCounts orderCounts;
@@ -98,8 +98,9 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         quitLogin.setOnClickListener(this);
         numberCounts = (RelativeLayout) findViewById(R.id.number_counts);
         numberCounts.setOnClickListener(this);
+        manageEvaluate = (RelativeLayout) findViewById(R.id.manager_evaluate);
+        manageEvaluate.setOnClickListener(this);
         userNameAndIntegral = (TextView) findViewById(R.id.user_name_and_integral);
-        myOrder = (TextView) findViewById(R.id.my_order_tv);
         userPortrait = (ImageView) findViewById(R.id.seller_portrait);
         lowInventoryCount = (TextView) findViewById(R.id.low_inventory_count);
         waitHandleCount = (TextView) findViewById(R.id.wait_handle_count);
@@ -221,23 +222,35 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             case R.id.goods_head_quarter:
                 Intent headQuarterIntent = new Intent(SellerManagerActivity.this, GoodsActivity.class);
+                headQuarterIntent.putExtra("userId", userId);
+                headQuarterIntent.putExtra("shopId", shopId);
+                headQuarterIntent.putExtra("mode", 1);
                 headQuarterIntent.putExtra("pageTitle", "总店商品");
                 startActivity(headQuarterIntent);
                 break;
 
             case R.id.goods_on_store:
                 Intent onStoreIntent = new Intent(SellerManagerActivity.this, GoodsActivity.class);
+                onStoreIntent.putExtra("userId", userId);
+                onStoreIntent.putExtra("shopId", shopId);
+                onStoreIntent.putExtra("mode", 2);
                 onStoreIntent.putExtra("pageTitle", "仓库中的商品");
                 startActivity(onStoreIntent);
                 break;
 
             case R.id.goods_on_selling:
                 Intent onSellingIntent = new Intent(SellerManagerActivity.this, OnSellingGoodsActivity.class);
+                onSellingIntent.putExtra("userId", userId);
+                onSellingIntent.putExtra("shopId", shopId);
+                onSellingIntent.putExtra("mode", 1);
                 startActivity(onSellingIntent);
                 break;
 
             case R.id.low_inventory:
                 Intent lowInventoryIntent = new Intent(SellerManagerActivity.this, OnSellingGoodsActivity.class);
+                lowInventoryIntent.putExtra("userId", userId);
+                lowInventoryIntent.putExtra("shopId", shopId);
+                lowInventoryIntent.putExtra("mode", 2);
                 lowInventoryIntent.putExtra("title", "缺货中的商品");
                 startActivity(lowInventoryIntent);
                 break;
@@ -269,6 +282,13 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
             case R.id.manager_orders:
                 Intent managerOrderIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
                 startActivity(managerOrderIntent);
+                break;
+
+            case R.id.manager_evaluate:
+                Intent managerEvaluateIntent = new Intent(SellerManagerActivity.this, ManageEvaluateActivity.class);
+                managerEvaluateIntent.putExtra("userId", userId);
+                managerEvaluateIntent.putExtra("shopId", shopId);
+                startActivity(managerEvaluateIntent);
                 break;
 
             case R.id.account_security:

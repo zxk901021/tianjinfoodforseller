@@ -16,27 +16,23 @@ import com.zhy_9.tianjinfoodgroup.util.UrlUtil;
 import java.util.HashMap;
 import java.util.Map;
 
-public class OrderListActivity extends Activity implements View.OnClickListener{
+public class ManageEvaluateActivity extends Activity implements View.OnClickListener{
 
+    private String userId, shopId;
+    private RecyclerView evaluateList;
     private TextView back;
-    private String userId;
-    private String shopId;
-    private RecyclerView orderList;
+    private Map<String, String> params;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_list);
+        setContentView(R.layout.activity_manage_evaluate);
+
+        getIntentData();
 
         initView();
-        getIntentData();
-        initOrderListData();
-    }
 
-    private void initView(){
-        back = (TextView) findViewById(R.id.order_list_back);
-        back.setOnClickListener(this);
-        orderList = (RecyclerView) findViewById(R.id.my_order_list);
+        getEvaluateInfo();
     }
 
     private void getIntentData(){
@@ -45,12 +41,17 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
         shopId = intent.getStringExtra("shopId");
     }
 
-    private void initOrderListData(){
-        Map<String, String> params = new HashMap<>();
-        params.put("user_id", userId);
+    private void initView(){
+        evaluateList = (RecyclerView) findViewById(R.id.evaluate_list);
+        back = (TextView) findViewById(R.id.manager_evaluate_back);
+        back.setOnClickListener(this);
+    }
+
+    private void getEvaluateInfo(){
+        params = new HashMap<>();
         params.put("shop_id", shopId);
-        params.put("order_type", "all");
-        HttpUtil.postVolley(OrderListActivity.this, UrlUtil.ORDER_CATEGORY, HttpUtil.initParam(params), new VolleyListener() {
+        params.put("user_id", userId);
+        HttpUtil.postVolley(ManageEvaluateActivity.this, UrlUtil.EVALUATE_LIST, HttpUtil.initParam(params), new VolleyListener() {
             @Override
             public void onErrorResponse(VolleyError volleyError) {
 
@@ -58,7 +59,7 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
 
             @Override
             public void onResponse(String s) {
-                Log.e("resp", s);
+                Log.e("Evaluate--resp", s);
             }
         });
     }
@@ -66,7 +67,7 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
     @Override
     public void onClick(View v) {
         switch (v.getId()){
-            case R.id.order_list_back:
+            case R.id.manager_evaluate_back:
                 finish();
                 break;
         }

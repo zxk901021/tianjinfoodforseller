@@ -12,6 +12,8 @@ public class UrlUtil {
     public static final String MALL_MESSAGE_COUNT = BASE_URL + "shop/shop_message_num";
     public static final String MODIFY_PASSWORD = BASE_URL + "user/modify_password";
     public static final String ORDER_CATEGORY = BASE_URL + "order/order_category";
+    public static final String GOODS_LIST = BASE_URL + "Goods/goods_list";
+    public static final String EVALUATE_LIST = BASE_URL + "order/comment_manage";
 
 
     public static final String GOODS_DETAIL_URL = "/index.php/Manage/Orders/index.html#details&";

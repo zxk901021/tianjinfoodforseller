@@ -85,6 +85,14 @@
             android:gravity="center"
             android:padding="10dp"/>
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/goods_on_selling_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goods_on_selling_top_menu"
+        android:layout_above="@+id/goods_on_selling_bottom_menu">
+
+    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/goods_on_selling_bottom_menu"

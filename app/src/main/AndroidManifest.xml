@@ -22,16 +22,16 @@
         <activity
             android:name=".SellerManagerActivity"
             android:label="@string/title_activity_seller_manager"
-            android:theme="@style/AppTheme"></activity>
+            android:theme="@style/AppTheme" />
         <activity android:name=".ForgetPasswordActivity" />
         <activity android:name=".OrderListActivity" />
         <activity android:name=".GoodsActivity" />
         <activity android:name=".OnSellingGoodsActivity" />
-        <activity android:name=".AccountSecurityActivity"></activity>
+        <activity android:name=".AccountSecurityActivity" />
         <activity android:name=".MallMessageActivity" />
         <activity android:name=".SetPasswordActivity" />
-
-        <activity android:name=".RecyclerActivity"></activity>
+        <activity android:name=".RecyclerActivity" />
+        <activity android:name=".ManageEvaluateActivity"></activity>
     </application>
 
 </manifest>
