@@ -4,11 +4,69 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/evaluate_goods_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/evaluate_goods_number"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"/>
+
     <ImageView
+        android:id="@+id/evaluate_goods_img"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evaluate_goods_name"/>
+
+    <TextView
+        android:id="@+id/goods_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evaluate_goods_img"/>
+
+    <RatingBar
+        android:id="@+id/evaluate_goods_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evaluate_goods_img"
+        android:layout_toRightOf="@+id/goods_score"/>
+    <TextView
+        android:id="@+id/time_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goods_score"/>
+
+    <RatingBar
+        android:id="@+id/evaluate_time_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goods_score"
+        android:layout_toRightOf="@+id/goods_score"/>
+
+    <TextView
+        android:id="@+id/service_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/time_score"/>
+
+    <RatingBar
+        android:id="@+id/evaluate_service_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/goods_score"
+        android:layout_toRightOf="@+id/time_score"/>
+
+    <TextView
+        android:id="@+id/evaluate_username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/service_score"/>
+    <TextView
+        android:id="@+id/evaluate_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/evaluate_username"/>
 
 
 </RelativeLayout>

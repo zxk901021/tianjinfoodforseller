@@ -281,6 +281,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             case R.id.manager_orders:
                 Intent managerOrderIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
+                managerOrderIntent.putExtra("userId", userId);
+                managerOrderIntent.putExtra("shopId", shopId);
                 startActivity(managerOrderIntent);
                 break;
 
