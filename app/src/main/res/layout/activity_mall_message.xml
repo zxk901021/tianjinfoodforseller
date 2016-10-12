@@ -79,5 +79,12 @@
             android:layout_weight="3"/>
 
     </LinearLayout>
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/mall_message_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/mall_msg_top_menu_layout">
+
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

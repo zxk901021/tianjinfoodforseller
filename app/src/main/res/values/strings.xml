@@ -13,4 +13,5 @@
     <string name="phone_number">手机号</string>
     <string name="send_verify_code">发送验证码</string>
     <string name="manage_evaluate">评价管理</string>
+    <string name="take_self">自提核销</string>
 </resources>

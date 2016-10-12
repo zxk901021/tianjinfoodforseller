@@ -43,6 +43,7 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
     private RelativeLayout mallMessage;
     private RelativeLayout numberCounts;
     private RelativeLayout manageEvaluate;
+    private RelativeLayout takeBySelf;
     private Button quitLogin;
     private UserInfo info;
     private TextView userNameAndIntegral;
@@ -109,6 +110,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
         deliveryingCount = (TextView) findViewById(R.id.deliverying_count);
         problemPackageCount = (TextView) findViewById(R.id.problem_package_count);
         mallMessageCount = (TextView) findViewById(R.id.mall_msg_count);
+        takeBySelf = (RelativeLayout) findViewById(R.id.take_by_oneself);
+        takeBySelf.setOnClickListener(this);
     }
 
     private void initParams() {
@@ -220,6 +223,13 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
                 startActivity(orderListIntent);
                 break;
 
+            case R.id.take_by_oneself:
+                Intent takeOneSelfIntent = new Intent(SellerManagerActivity.this, TakeSelfActivity.class);
+                takeOneSelfIntent.putExtra("userId", userId);
+                takeOneSelfIntent.putExtra("shopId", shopId);
+                startActivity(takeOneSelfIntent);
+                break;
+
             case R.id.goods_head_quarter:
                 Intent headQuarterIntent = new Intent(SellerManagerActivity.this, GoodsActivity.class);
                 headQuarterIntent.putExtra("userId", userId);
@@ -257,21 +267,33 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             case R.id.wait_handle:
                 Intent waitHandleIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
+                waitHandleIntent.putExtra("userId", userId);
+                waitHandleIntent.putExtra("shopId",shopId);
+                waitHandleIntent.putExtra("mode", 1);
                 startActivity(waitHandleIntent);
                 break;
 
             case R.id.handled:
                 Intent handledIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
+                handledIntent.putExtra("userId", userId);
+                handledIntent.putExtra("shopId",shopId);
+                handledIntent.putExtra("mode", 2);
                 startActivity(handledIntent);
                 break;
 
             case R.id.packaging:
                 Intent packagingIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
+                packagingIntent.putExtra("userId", userId);
+                packagingIntent.putExtra("shopId",shopId);
+                packagingIntent.putExtra("mode", 3);
                 startActivity(packagingIntent);
                 break;
 
             case R.id.deliverying:
                 Intent deliveryingIntent = new Intent(SellerManagerActivity.this, OrderListActivity.class);
+                deliveryingIntent.putExtra("userId", userId);
+                deliveryingIntent.putExtra("shopId",shopId);
+                deliveryingIntent.putExtra("mode", 4);
                 startActivity(deliveryingIntent);
                 break;
 
@@ -301,6 +323,8 @@ public class SellerManagerActivity extends Activity implements View.OnClickListe
 
             case R.id.mall_msg:
                 Intent mallMsgIntent = new Intent(SellerManagerActivity.this, MallMessageActivity.class);
+                mallMsgIntent.putExtra("userId", userId);
+                mallMsgIntent.putExtra("shopId", shopId);
                 startActivity(mallMsgIntent);
                 break;
 

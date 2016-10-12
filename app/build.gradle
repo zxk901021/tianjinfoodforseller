@@ -27,4 +27,5 @@ dependencies {
     compile files('src/libs/lib_volley.jar')
     compile files('src/libs/badgeview.jar')
     compile 'com.alibaba:fastjson:1.2.17'
+    compile 'com.rengwuxian.materialedittext:library:2.1.4'
 }

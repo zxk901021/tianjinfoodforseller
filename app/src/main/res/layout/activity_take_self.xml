@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_take_self"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/take_self_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="&lt;"
+        android:textSize="24dp"
+        android:paddingLeft="15dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingRight="10dp"/>
+
+    <TextView
+        android:id="@+id/take_self_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/take_self"
+        android:textSize="@dimen/title_text_size"
+        android:textColor="@color/black"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/take_self_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="保存"
+        android:textColor="@color/white"
+        android:background="@drawable/red_button_no_alpha"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/take_self_title"
+        android:layout_alignBottom="@+id/take_self_title"
+        android:layout_marginRight="5dp"/>
+    <View
+        android:id="@+id/take_self_separate_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/separate_line"
+        android:layout_below="@+id/take_self_title"
+        android:layout_marginTop="10dp"/>
+
+    <com.rengwuxian.materialedittext.MaterialEditText
+        android:id="@+id/take_self_edit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/take_self_separate_line"
+        android:hint="请输入您的自提码"
+        android:imeOptions="actionDone"
+        app:met_primaryColor="@color/red_counts"
+        app:met_clearButton="true"
+        android:layout_margin="10dp"
+        app:met_floatingLabel="highlight"
+        app:met_floatingLabelTextSize="14sp"
+        />
+    <Button
+        android:id="@+id/take_self_photo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/take_self_edit"
+        android:layout_centerHorizontal="true"
+        android:text="扫码"
+        android:textColor="@color/white"
+        android:background="@drawable/red_button_no_alpha"/>
+
+</RelativeLayout>

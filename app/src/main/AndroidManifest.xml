@@ -31,7 +31,8 @@
         <activity android:name=".MallMessageActivity" />
         <activity android:name=".SetPasswordActivity" />
         <activity android:name=".RecyclerActivity" />
-        <activity android:name=".ManageEvaluateActivity"></activity>
+        <activity android:name=".ManageEvaluateActivity" />
+        <activity android:name=".TakeSelfActivity"></activity>
     </application>
 
 </manifest>

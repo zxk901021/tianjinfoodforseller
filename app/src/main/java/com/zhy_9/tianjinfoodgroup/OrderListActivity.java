@@ -37,6 +37,7 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
     private List<OrderInfo> data;
     private OrderDetailListAdapter adapter;
     private TextView orderAll, orderUnHandled, orderHandled, orderPacking, orderDelivery, orderArrived;
+    private int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,7 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
 
         initView();
         getIntentData();
-        initOrderListData("all");
+        initOrderListData(chooseRequestMode(mode));
     }
 
     private void initView(){
@@ -70,6 +71,30 @@ public class OrderListActivity extends Activity implements View.OnClickListener{
         Intent intent = getIntent();
         userId = intent.getStringExtra("userId");
         shopId = intent.getStringExtra("shopId");
+        mode = intent.getIntExtra("mode", 0);
+    }
+
+    private String chooseRequestMode(int mode){
+        String request = "";
+        switch (mode) {
+            case 0:
+                request = "all";
+                break;
+            case 1:
+                request = "beAcceptedCount";
+                break;
+            case 2:
+                request = "hasAcceptedCount";
+                break;
+
+            case 3:
+                request = "packagedCount";
+                break;
+            case 4:
+                request = "appraisesCount";
+                break;
+        }
+        return request;
     }
 
     private void initOrderListData(String request){
